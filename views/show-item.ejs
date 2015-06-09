@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<head>
+	<style>
+		img {
+			width: 200px;
+			height: 200px;
+		}
+		h1 {
+			text-align: center;
+		}
+		p {
+			text-align: center;
+		}
+		input[type="submit"] {
+			position: center;
+		}
+		table {
+			width: 800px;
+		}
+		body {
+			padding: 5px 30px 30px 30px;
+			background-color: #99EBFF;
+		}
+	</style>
+
+
+
+</head>
+
+<body>
+	<table>
+		
+		<td><a class="hyper" href="/sparkles">Home</a></td>
+		<% if (admin) { %>
+		<td><a class="hyper" href="/item/<%= item.id %>/edit">Edit Item</a></td>
+		<td><form method="POST" action="http://localhost:3000/logout">
+			<button style="border:2px green solid;">Logout</button></td>
+			<% } %>
+
+
+		</form>
+	</table>
+
+	<h1><%= item.name %></h1> 
+
+	<p>
+		<img src="<%= item.image %>"><br>
+		Price: $<%= item.price %></br>
+		<% if (admin) { %>
+		Amount in stock: <%= item.quantity %></br>
+		<% } %>
+		<a href="/item/<%= item.id %>/add-to-shopping-cart">Add to cart</a>
+	<!-- <form method="POST" action="/item/<%= item.id %>/order">
+		<input type = "submit" value = "Buy!" style = "border:2px green solid;"/>
+	</form> -->
+
+	<form method="POST" action="/item/<%= item.id %>?_method=DELETE">
+		<input type="submit" value="Delete" style="border:2px green solid;"/>
+	</form>
+</p>
+
+</body>
+</html>

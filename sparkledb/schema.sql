@@ -1,0 +1,52 @@
+DROP TABLE IF EXISTS categories;
+CREATE TABLE categories (
+id INTEGER PRIMARY KEY,
+name TEXT,
+image TEXT,
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+DROP TABLE IF EXISTS items;
+CREATE TABLE items (
+id INTEGER PRIMARY KEY,
+category_id INTEGER,
+name TEXT,
+image TEXT,
+quantity INTEGER,
+price INTEGER,
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+DROP TABLE IF EXISTS orders;
+CREATE TABLE orders (
+id INTEGER PRIMARY KEY,
+item_name TEXT,
+item_id INTEGER,
+item_quantity INTEGER,
+item_price INTEGER,
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+DROP TABLE IF EXISTS users;
+CREATE TABLE users (
+id INTEGER PRIMARY KEY,
+username TEXT,
+password TEXT,
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+DROP TABLE IF EXISTS carts;
+CREATE TABLE carts (
+item_id INTEGER PRIMARY KEY,
+session_id TEXT,
+item_name TEXT,
+item_price INTEGER,
+item_quantity INTEGER,
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+
+
+
+

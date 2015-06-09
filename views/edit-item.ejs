@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<head>
+<style>
+	body {
+			text-align: left;
+			margin: 30px;
+			padding: 0px 10px 5px;
+			background-color: #99EBFF;
+		}
+		input[type="text"] {
+			width: 400px;
+			font-size: 20px;
+		}
+		input[type="number"] {
+			width: 400px;
+			font-size: 20px;
+		}
+		table {
+			width: 800px;
+		}
+
+</style>
+
+</head>
+<body>
+<table>
+	<td><a href="/sparkles">Home</a></td>
+	<td><form method="POST" action="http://localhost:3000/logout">
+		<button>Logout</button></td>
+	</form>
+	</table>
+	<h3>Update <%= thisItem.name %> here: </h3>
+
+	<form action ="/item/<%= thisItem.id %>/update?_method=PUT" method="POST">
+		
+	<input class="text" type="text" name="name" value="<%= thisItem.name %>"><br></br>
+	<input class="image" type="text" name="image" value="<%= thisItem.image %>"></br></br>
+	<input class="price" type="number" name="price" value="<%= thisItem.price %>"></br></br>
+	<input class="quantity" type="number" name="quantity" value="<%= thisItem.quantity %>"></br></br>
+		<input type="submit" value="Update!" style="border:2px green solid;"/>
+	</form>
+	
+</body>
+</html> 

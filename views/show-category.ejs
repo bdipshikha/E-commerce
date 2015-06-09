@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<head>
+	<style>
+		body {
+			background-color: #99EBFF;
+		}
+		
+		img {
+			width: 200px;
+			height: 200px;
+		}
+		h1 {
+			text-align: center;
+		}
+
+		li {
+			color: #480000;
+			padding-bottom: 15px;
+			font-size: 16px;
+			font-weight: bold;
+			width: 33%;
+			float: left;
+			list-style-type: none;
+		}
+		table {
+			width: 800px;
+		}
+
+	</style>
+
+
+</head>
+<body>
+	<table>
+		<td><a class="hyper" href="/sparkles">Home</a></td>
+
+		<% if (admin) { %> 
+			<td><a class="hyper" href="/sparkle/<%= category.id %>/edit">Edit Category</a></td>
+			<td><a class="hyper" href="/category/<%= category.id %>/items/new"> Add a new Item</a></td>
+		
+		<td><form method="POST" action="http://localhost:3000/logout">
+			<button style="border:2px green solid;">Logout</button></td>
+		<% } %>
+		</form>
+	</table>
+	<h1><%= category.name %></h1> 
+</br>
+
+<ul>
+	<% for (var i = 0; i<items.length; i++) { %>
+
+	<li>
+		<%= items[i].name %></br></br>
+		<a class="list" href="/item/<%= items[i].id %>"><img src="<%= items[i].image %>"></br></br></a>
+		
+	</li>
+	<% } %> 
+</ul></br>
+
+
+
+
+</br></br></br>
+
+<p><form method="POST" action="/sparkle/<%= category.id %> ?_method=DELETE">
+	<input type="submit" value="Delete" style="border:2px green solid;"/>
+</form></p></br>
+
+<br/>
+
+</body>
+</html>

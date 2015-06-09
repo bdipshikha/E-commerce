@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<head>
+<style>
+		body {
+			padding-left: 50px;
+			background-color: #99EBFF;
+		}
+		input[type="text"] {
+			width: 400px;
+			font-size: 20px;
+		}
+		input[type="number"] {
+			width: 400px;
+			font-size: 20px;
+		}
+		table {
+			width: 800px;
+		}
+	</style>	
+</head>
+<body>
+<table>
+<td><a href="/sparkles">Home</a></br></td>
+<form method="POST" action="http://localhost:3000/logout">
+	<td><button>Logout</button></td>
+</form>
+</table>
+	<h1>Add a New Item</h1>
+	<p><form action ="/category/<%= category_id %>/item/savenewitem" method="POST">
+
+		<input class="text" type="text" name="name" placeholder="name"><br></p>
+		<input class="image" type="text" name="image" placeholder="url" ></br></br>
+		<input class="price" type="number" name="price" placeholder="price" ></br></br>
+		<input class="quantity" type="number" name="quantity" placeholder="quantity"></br></br>
+		<input type="submit" value="Save New Item" style="border:2px green solid;"/>
+	</form>
+</body>
+</html>

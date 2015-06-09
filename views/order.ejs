@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+
+	<script type="text/javascript">
+    // Fill in your publishable key
+    Stripe.setPublishableKey('pk_test_fi2vIZQm6VsnqLfJljb2jErl');
+
+    var stripeResponseHandler = function(status, response) {
+    	var $form = $('#payment-form');
+
+    	if (response.error) {
+       // Show the errors on the form
+       $form.find('.payment-errors').text(response.error.message);
+       $form.find('button').prop('disabled', false);
+   } else {
+       // token contains id, last4, and card type
+       var token = response.id;
+       // Insert the token into the form so it gets submitted to the server
+       $form.append($('<input type="hidden" name="stripeToken" />').val(token));
+       // and re-submit
+       $form.get(0).submit();
+   }
+};
+
+jQuery(function($) {
+	$('#payment-form').submit(function(e) {
+		var $form = $(this);
+
+       // Disable the submit button to prevent repeated clicks
+       $form.find('button').prop('disabled', true);
+
+       Stripe.card.createToken($form, stripeResponseHandler);
+
+       // Prevent the form from submitting with the default action
+       return false;
+   });
+});
+</script>
+
+<style>
+
+	.customer-container {
+		border: 1px solid black;
+    	width: 50%;
+    	margin: 5% auto;
+    	padding-left: 10px;
+    	padding-bottom: 20px;
+
+
+	}
+
+	h1 {
+		text-align: center;
+	}
+	h3 {
+		text-align: left;
+	}
+	body {
+		padding-left: 10px;
+		background-color: #99EBFF;
+		font-weight: bold;
+	}
+
+	input[type="text"] {
+		font-size: 14px;
+		border-radius: 5px;
+	}
+	input[data-stripe] {
+		font-size: 14px;
+		border-radius: 5px;
+	}
+
+</style>
+</head>
+<body>
+	<a href="/sparkles">Home</a>
+
+<!-- 	<form method="POST" action="http://localhost:3000/logout">
+		<button style="border:2px green solid;">Logout</button>
+	</form> -->
+	<h1> Checkout </h1>
+	<div class="customer-container">
+		<h3> Billing Information: </h3>
+		   <form action='/order' method="POST" class="pure-form pure-form-aligned">
+			<fieldset>
+				<div class="pure-control-group">
+				<label for="firstname">Firstname:</label>
+					<input type="text" name = "firstname"></br>
+				</div>
+				<div class="pure-control-group">
+				<label for="lastname">Lastname:</label>
+					<input type="text" name = "lastname"></br>
+				</div>
+				<div class="pure-control-group">
+					<label for="address">Address:</label>
+						<input type="text" name = "address"></br>
+				</div>
+				<div class="pure-control-group">
+				<label for="city">City:</label>
+					<input type="text" name = "city"></br>
+				</div>
+				<div class="pure-control-group">
+					<label for="country">Country:</label>
+						<input type="text" name = "country"></br>
+				</div>
+				<div class="pure-control-group">
+					<label for="state">State:</label>
+						<input type="text" name = "state"></br>
+				</div>
+				<div class="pure-control-group">
+				<label for="zip">Zip:</label>	
+					<input type="text" name = "zip"></br>
+				</div>
+			</fieldset>
+		   </form>
+	
+
+			<h3> Payment Information: </h3>
+	
+			
+			<form class="pure-form" action='/order' method="post">
+				<label for="visa" class="pure-checkbox">
+					<input id="visa" type="checkbox" value="VISA">VISA
+				</label>
+
+				<label id="mastercard" class="pure-checkbox">
+					<input id="mastercard" type="checkbox" value="MASTERCARD">MASTER CARD
+				</label>
+
+				<label for="americanexpress" class="pure-checkbox">
+					<input id="americanexpress" type="checkbox" value="AMERICAN EXPRESS">AMERICAN EXPRESS
+				</label>	
+			
+			</form>
+
+			<form action="/order" method="POST" id="payment-form" class="pure-form pure-form-aligned">
+
+				<!-- Add a section to display errors if you want -->
+				<span class='payment-errors' style="color: red;"></span></br></br>
+				<div class="pure-control-group">
+					<label for="number">Card Number:</label>
+						<input data-stripe="number"/></br>
+				</div>
+				<div class="pure-control-group">
+					<label for="cvc">CVC:</label>
+						<input data-stripe="cvc"/></br>
+				</div>
+				<div class="pure-control-group">
+					<label for="exp-month">Exp-Month:</label>
+						<input data-stripe="exp-month"/></br>
+				</div>
+				<div class="pure-control-group">
+					<label for="exp-year">Exp-Year:</label>
+						<input data-stripe="exp-year"/></br>
+				</div>
+				<div class="pure-control-group">
+					<label for="amount">Amount:</label>
+						<input name="amount" data-stripe="amount" value="<%= total %>"/></br></br>
+				</div>
+				<div class="pure-controls">
+					<button style="border:2px green solid;" type="submit">Submit Payment</button>
+				</div>
+			</form>
+
+	</div>
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

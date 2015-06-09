@@ -1,0 +1,92 @@
+<html>
+<head>
+  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+</head>
+<style>
+  .login-container {
+    border: 1px solid black;
+    width: 50%;
+    margin: 5% auto;
+    padding: 5px;
+
+  }
+
+  body {
+    background-color: #99EBFF;
+    padding-left: 5px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  input[type="text"] {
+    font-size: 16px;
+    border-radius: 5px;
+  }
+
+  input[type="password"] {
+    font-size: 16px;
+    border-radius: 5px;
+  }
+
+  h3 {
+    text-align: center;
+  }
+
+  
+  
+</style>
+
+<body>
+
+ <div class="login-container">
+
+ 
+    <h3>New to this Site? Sign Up!</h3><br/>
+
+    <form action = "/create-user" method = "POST" class="pure-form pure-form-aligned">
+      <fieldset>
+
+      <div class="pure-control-group">
+        <label for="username">Username: </label>
+        <input type = "text" name = "username"><br/>
+      </div>
+
+      <div class="pure-control-group">
+      <label for="password">Password: </label>
+      <input type = "password" name = "password"><br/>
+      </div>
+
+      <div class="pure-control-group">
+        <label for="confirm_password">Confirmation: </label>
+        <input type = "password" name = "confirm_password"><br/>
+      </div>
+       <div class="pure-controls">
+      <button style="border:2px green solid;">Sign Up</button>
+      </div>
+      </fieldset>
+    </form>
+  
+  
+  <br/><br/>
+  <!-- <fieldset> -->
+ 
+    <h3>Have an Account? Sign In</h3></br>
+
+    <form action = "/create-session" method = "POST" class="pure-form pure-form-aligned">
+      <div class="pure-control-group">
+        <label for="username">Username: </label>
+        <input type = "text" name = "username"><br/>
+       </div>
+       
+       <div class="pure-control-group"> 
+        <label for="password">Password: </label>
+        <input type = "password" name = "password"><br/>
+      </div>
+      <div class="pure-controls">
+        <button style="border:2px green solid;">Sign In</button>
+        </div>
+    </form>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<head>
+	<style>
+		body {
+			text-align: left;
+			background-color: #99EBFF;
+			margin: 30px;
+			padding: 0px 10px 5px;
+		}
+		input[type="text"] {
+			width: 400px;
+			font-size: 20px;
+		}
+		table {
+			width: 800px;
+		}
+	</style>
+
+
+</head>
+<body>
+	<table>
+		<td><a href="/sparkles">Home</a></td>
+		<td><form method="POST" action="http://localhost:3000/logout">
+			<button style="border:2px green solid;">Logout</button></td>
+		</form>
+	</table>
+
+	<h3>Update <%= thisCategory.name %> here: </h3>
+	<form action ="/sparkle/<%= thisCategory.id %>?_method=PUT" method="POST">
+		<p><input class="text" type="text" name="name" value="<%= thisCategory.name %>"></br></p>
+
+		<input class="image" type="text" name="image" value="<%= thisCategory.image %>"></br></br>
+		<button style="border:2px green solid;">Update!</button>
+	</form>
+
+</body>
+</html> 

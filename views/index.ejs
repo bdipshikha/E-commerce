@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style>
+		body {
+			background-color: #99EBFF;
+			padding-left: 50px;
+		}
+		h1 {
+			font-family: Courgette;
+			text-align: center;
+		}
+		img {
+			width: 200px;
+			height: 200px;
+		}
+		ul {
+			padding: 10px;
+		}
+
+		li {
+			color: #480000;
+			padding-bottom: 15px;
+			font-size: 16px;
+			font-weight: bold;
+			width: 33%;
+			float: left;
+			list-style-type: none;
+		}
+		table {
+			width: 800px;
+		}
+	</style>
+
+</head>
+<body>
+	<table>
+	<% if (admin) { %>
+		<td><a class="hyper" href="/categories/new"> Create a new Category </a></td>
+		<form method="POST" action="http://localhost:3000/logout">
+			<td><button style="border:2px green solid;">Logout</button></td>
+	<% } %>
+		</form>
+	</table>
+	<form method="POST" action="http://localhost:3000/index">
+	</form>
+	
+	
+	<h1>Spark.le! Jewelry</h1>
+	<p>
+		
+		<ul>
+			<% sparkle.forEach(function(category) { %> 
+			<li>
+				<%= category.name %></br></br>
+				<a class="list" href="/sparkle/<%= category.id %>"><img src="<%= category.image %>"></a>
+
+			</li>
+			<% }); %>
+		</ul>
+	</p>	
+</body>
+</html>
