@@ -20,6 +20,7 @@ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 DROP TABLE IF EXISTS orders;
 CREATE TABLE orders (
 id INTEGER PRIMARY KEY,
+sessionID TEXT,
 item_name TEXT,
 item_id INTEGER,
 item_quantity INTEGER,

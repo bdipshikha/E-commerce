@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({
 }))
 
 //method override setup
-var methodOverride = require('method-Override')
+var methodOverride = require('method-override')
     //tell app which override method to use
 app.use(methodOverride('_method'))
 
@@ -127,7 +127,7 @@ app.put('/sparkle/:id', function(req, res) {
     db.run("UPDATE categories SET name = ?, image = ?  WHERE id = ?", req.body.name, req.body.image, req.params.id, function(err) {
             if (err) {
                 throw err
-            } // console.log(res)
+            } 
         })
         //redirect to this individual category page to see changes
     res.redirect('/sparkle/' + req.params.id)
@@ -210,7 +210,7 @@ app.put('/item/:id/update', function(req, res) {
         function(err) {
             if (err) {
                 throw err
-            } // console.log(res)
+            }
         });
     //redirect to this to see changes
     res.redirect('/item/' + req.params.id)
@@ -235,10 +235,9 @@ app.get('/item/:id/add-to-shopping-cart', function(req, res) {
             throw err
         } else {
 
-            // console.log(JSON.stringify(item));
 
             var newCartItem = {};
-            newCartItem.itemiId = id;
+            newCartItem.itemId = id;
             newCartItem.itemQty = 1;
             newCartItem.itemPrice = item.price;
             newCartItem.itemName = item.name;
@@ -270,6 +269,10 @@ app.post('/item/:id/add-to-shopping-cart', function(req, res) {
 });
 
 app.get('/order', function(req, res) {
+
+    console.log('session ID' + req.sessionID);
+
+
     var cid = req.params.id;
 
     var total = 0;
@@ -285,15 +288,6 @@ app.get('/order', function(req, res) {
     });
 });
 
-// app.post('/order', function(req, res) {
-//     var id = req.params.id;
-//     db.run("INSERT INTO orders (item_name, item_id, item_quantity, item_price) VALUES (?, ?, ?, ?);", id, req.body.item_name, req.params.item_id, req.params.item_price, req.params.item_quantity, function(err) {
-//             if (err) {
-//                 throw err 
-//             }
-//     });
-//     res.render('order.ejs', { id: id })
-// });
 
 // ****************************** user starts here ************************************
 
@@ -360,26 +354,14 @@ app.post('/logout', function(req, res) {
 });
 
 
-// app.get('/', function(req, res) {
-//     db.run("INSERT INTO orders (item_name, item_id, item_quantity, item_price) VALUES (?, ?, ?, ?);", "myitemname", 123, 2, 100, function(err) {
-//         if (err) {
-//             throw err
-//         }
-//         console.log("12345678")
-//     });
-//     res.redirect('/order')
-// });
-
-
-
-
-
 // ******************************** card charge ******************************
 
 // setup stripe with test API key
 // Create a new customer and then a new charge for that customer:
 
 app.post('/order', function(req, res) {
+
+
     var stripeToken = req.body.stripeToken;
     var charge = stripe.charges.create({
         amount: parseInt(req.body.amount) * 100, // amount in cents, again
@@ -390,16 +372,28 @@ app.post('/order', function(req, res) {
         if (err && err.type === 'StripeCardError') {
 
         } else {
-            // console.log(res)
-            db.run("INSERT INTO orders (item_name, item_id, item_quantity, item_price) VALUES (?, ?, ?, ?);", req.params.id, req.body.item_name, req.body.item_id, req.body.item_quantity, req.body.item_price, function(err) {
-                if (err) {
-                    throw err
-                }
-  
-                res.send('Your order has been processed. Your card will be charged with $' + req.body.amount +
-                    '. Your item will be shipped to the billing address. Thank you for shopping with us!');
-                res.end();
-            });
+         
+
+            for (var idx=0; idx <req.session.cart.length; idx++) {
+                var item = req.session.cart[idx];
+                db.run("INSERT INTO orders (sessionID, item_name, item_id, item_quantity, item_price)"+
+                    " VALUES (?, ?, ?, ?, ?);",  
+                    req.sessionID,
+                    item.itemName, 
+                    item.itemId, 
+                    item.itemQty, 
+                    item.itemPrice, 
+                    function(err) {
+                        if (err) {
+                            throw err
+                        }  
+                    });
+            }
+ 
+            res.send('Your order has been processed. Your card will be charged with $' + req.body.amount +
+                '. Your item will be shipped to the billing address. Thank you for shopping with us!');
+            res.end();
+
         }
     });
 });
