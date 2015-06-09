@@ -57,7 +57,7 @@ app.get('/sparkles', function(req, res) {
         var admin = false;
         if (req.session != null) {
             admin = req.session.valid_user;
-        }
+        } 
         res.render('index.ejs', {
             sparkle: sparkle,
             admin: admin
@@ -259,6 +259,16 @@ app.get('/cart', function(req, res) {
     })
 });
 
+app.post('/item/:id/add-to-shopping-cart', function(req, res) {
+    db.run("INSERT INTO carts (item_id, session_id, item_name, item_price, item_quantity) VALUES (?, ?, ?, ?, ?)", req.body.item_id, req.body.session_id, req.body.item_name, req.body.item_price, req.body.quantity, function(err) {
+        if (err) {
+            throw err
+        } else {
+
+        }
+    });
+});
+
 app.get('/order', function(req, res) {
     var cid = req.params.id;
 
@@ -292,6 +302,7 @@ app.get('/login', function(req, res) {
 
 });
 
+// creating admin
 app.post('/create-user', function(req, res) {
     var username = req.body.username;
     var formPassword = req.body.password;
@@ -348,14 +359,19 @@ app.post('/logout', function(req, res) {
     });
 });
 
-app.post('/insert-test', function(req, res) {
-    db.run("INSERT INTO orders (item_name, item_id, item_quantity, item_price) VALUES (?, ?, ?, ?);", req.params.id, req.body.item_name, req.params.item_id, req.params.item_price, req.params.item_quantity, function(err) {
-        if (err) {
-            throw err
-        }
-    });
-    res.redirect('/order')
-});
+
+// app.get('/', function(req, res) {
+//     db.run("INSERT INTO orders (item_name, item_id, item_quantity, item_price) VALUES (?, ?, ?, ?);", "myitemname", 123, 2, 100, function(err) {
+//         if (err) {
+//             throw err
+//         }
+//         console.log("12345678")
+//     });
+//     res.redirect('/order')
+// });
+
+
+
 
 
 // ******************************** card charge ******************************
@@ -375,13 +391,11 @@ app.post('/order', function(req, res) {
 
         } else {
             // console.log(res)
-            db.run("INSERT INTO orders (item_name, item_id, item_quantity, item_price) VALUES (?, ?, ?, ?);", req.params.id, req.body.item_name, req.params.item_id, req.params.item_price, req.params.item_quantity, function(err) {
+            db.run("INSERT INTO orders (item_name, item_id, item_quantity, item_price) VALUES (?, ?, ?, ?);", req.params.id, req.body.item_name, req.body.item_id, req.body.item_quantity, req.body.item_price, function(err) {
                 if (err) {
                     throw err
                 }
-                console.log('????????' + req.body + '???????????');
-
-
+  
                 res.send('Your order has been processed. Your card will be charged with $' + req.body.amount +
                     '. Your item will be shipped to the billing address. Thank you for shopping with us!');
                 res.end();

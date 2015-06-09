@@ -20,7 +20,10 @@
 		body {
 			padding: 5px 30px 30px 30px;
 			background-color: #99EBFF;
+			position: center;
+			font-family: sans-serif;
 		}
+
 	</style>
 
 
@@ -53,10 +56,11 @@
 	<!-- <form method="POST" action="/item/<%= item.id %>/order">
 		<input type = "submit" value = "Buy!" style = "border:2px green solid;"/>
 	</form> -->
-
+	<% if (admin) { %>
 	<form method="POST" action="/item/<%= item.id %>?_method=DELETE">
 		<input type="submit" value="Delete" style="border:2px green solid;"/>
 	</form>
+	<% } %>
 </p>
 
 </body>

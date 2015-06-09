@@ -3,6 +3,7 @@
 	<style>
 		body {
 			background-color: #99EBFF;
+			font-family: sans-serif;
 		}
 		
 		img {
@@ -25,6 +26,7 @@
 		table {
 			width: 800px;
 		}
+		
 
 	</style>
 
@@ -62,9 +64,11 @@
 
 </br></br></br>
 
+<% if (admin) { %>
 <p><form method="POST" action="/sparkle/<%= category.id %> ?_method=DELETE">
 	<input type="submit" value="Delete" style="border:2px green solid;"/>
 </form></p></br>
+<% } %>
 
 <br/>
 
