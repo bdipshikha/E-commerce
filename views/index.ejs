@@ -1,19 +1,27 @@
 <!DOCTYPE html>
 <html>
+	<title>Spark.le! Jewelry</title>
 <head>
+
 	<style>
+
 		body {
-			background-color: #99EBFF;
+			background-opacity: 0.1;
+			background-position: center;
 			padding-left: 50px;
+			background-repeat: none;
+			
 		}
 		h1 {
 			font-family: sans-serif;
 			text-align: center;
+			color: #480000;
 		}
 		img {
 			width: 200px;
 			height: 200px;
 		}
+
 		ul {
 			padding: 10px;
 		}
@@ -21,6 +29,7 @@
 		li {
 			font-family: sans-serif;
 			color: #480000;
+			padding-top: 10px;
 			padding-bottom: 15px;
 			font-size: 16px;
 			font-weight: bold;
@@ -29,16 +38,33 @@
 			list-style-type: none;
 		}
 		table {
-			width: 800px;
+			width: 400px;
 		}
+		header {
+			height: 100%;
+			float: right;
+			padding-right: 50px;
+		}
+		#logo {
+			height: 70px;
+			width: 70px;			
+		}
+
 	</style>
 
 </head>
 <body>
+	<header>
+		
+		<img id = "logo" src = "http://globe-views.com/dcim/dreams/diamond/diamond-01.jpg"/>
+
+	</header>
+
+
 	<table>
 	<% if (admin) { %>
 		<td><a class="hyper" href="/categories/new"> Create a new Category </a></td>
-		<form method="POST" action="/logout">
+		<td><form method="POST" action="/logout">
 			<td><button style="border:2px green solid;">Logout</button></td>
 	<% } %>
 		</form>
@@ -47,7 +73,7 @@
 	</form>
 	
 	
-	<h1>Spark.le! Jewelry</h1>
+	<h1>Spark.le!</h1>
 	<p>
 		
 		<ul>

@@ -3,41 +3,82 @@
 <html>
 <head>
     <style>
+        h2 {
+            text-align: center;
+        }
         body {
-            background-color: #99EBFF;
-            padding-left: 50px;
+            padding-left: 30px;
             font-family: sans-serif;
         }
         table {
             text-align: center;
         }
+        form {
+            text-align: center;
+        }
+        header {
+            height: 100%;
+            float: right;
+            padding-right: 50px;
+        }
+        #logo {
+            height: 70px;
+            width: 70px;            
+        }
     </style>
+
+
     
 	<title></title>
 </head>
 <body>
+    <header>
+        <img id = "logo" src = "http://globe-views.com/dcim/dreams/diamond/diamond-01.jpg"/>
+    </header>
     <td><a href="/sparkles">Home</a></td>
 
-    <h2>Shopping cart</h2>
+    <h2><u>Shopping cart</u></h2>
 
 
-    <table border="1">
+    <table  align = "center" width = "400" height = "250">
 
         <tr>
             <th>Item</th>
             <th>Qty</th>
-            <th>Price</th>
-            <th>Total</th>
+            <th>Price</th>    
         </tr>
+
         <% for (var i = 0; i<cart.length; i++) { %>
 
         <tr>
             <td><%= cart[i].itemName %></td>
             <td><%= cart[i].itemQty %></td>
-            <td><%= cart[i].itemPrice %></td>
-            <td><%= cart[i].itemQty * cart[i].itemPrice %></td>
+            <td><%= cart[i].itemPrice %></td>         
         </tr>
-        <%}%>
+        <% } %>
+   
+
+        <tr>
+            <th></th>
+            <th>Subtotal</th>
+            
+            <td><%= cart.subtotal %></td>
+        </tr>  
+
+
+        <tr>
+            <th></th>
+            <th>Tax</th>
+            
+            <td><%= cart.tax %></td>
+        </tr>
+        <tr>
+            <th></th>
+            <th>Total</th>
+            
+            <td><%= cart.total %></td>
+         </tr>
+       
 
     </table>
 

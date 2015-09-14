@@ -3,7 +3,7 @@
 <style>
 		body {
 			padding-left: 50px;
-			background-color: #99EBFF;
+			/*background-color: #99EBFF;*/
 			font-family: sans-serif;
 		}
 		input[type="text"] {
@@ -16,6 +16,9 @@
 		}
 		table {
 			width: 800px;
+		}
+		textarea {
+			font-size: 20px;
 		}
 	</style>	
 </head>
@@ -33,6 +36,7 @@
 		<input class="image" type="text" name="image" placeholder="url" ></br></br>
 		<input class="price" type="number" name="price" placeholder="price" ></br></br>
 		<input class="quantity" type="number" name="quantity" placeholder="quantity"></br></br>
+		<textarea rows="15" cols="100" name="description" placeholder="description"></textarea></br></br>
 		<input type="submit" value="Save New Item" style="border:2px green solid;"/>
 	</form>
 </body>

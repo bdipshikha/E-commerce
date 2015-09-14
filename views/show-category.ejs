@@ -2,7 +2,7 @@
 <head>
 	<style>
 		body {
-			background-color: #99EBFF;
+			padding-left: 50px;
 			font-family: sans-serif;
 		}
 		
@@ -11,6 +11,7 @@
 			height: 200px;
 		}
 		h1 {
+			color: #480000;
 			text-align: center;
 		}
 
@@ -26,6 +27,15 @@
 		table {
 			width: 800px;
 		}
+		header {
+			height: 100%;
+			float: right;
+			padding-right: 50px;
+		}
+		#logo {
+			height: 70px;
+			width: 70px;			
+		}
 		
 
 	</style>
@@ -33,6 +43,9 @@
 
 </head>
 <body>
+	<header>
+		<img id = "logo" src = "http://globe-views.com/dcim/dreams/diamond/diamond-01.jpg"/>
+	</header>
 	<table>
 		<td><a class="hyper" href="/sparkles">Home</a></td>
 
@@ -40,8 +53,13 @@
 			<td><a class="hyper" href="/sparkle/<%= category.id %>/edit">Edit Category</a></td>
 			<td><a class="hyper" href="/category/<%= category.id %>/items/new"> Add a new Item</a></td>
 		
-		<td><form method="POST" action="/logout">
+			<td><form method="POST" action="/sparkle/<%= category.id %> ?_method=DELETE">
+			<input type="submit" value="Delete" style="border:2px green solid;"/>
+			</form></td>
+
+			<td><form method="POST" action="/logout">
 			<button style="border:2px green solid;">Logout</button></td>
+
 		<% } %>
 		</form>
 	</table>
@@ -64,11 +82,11 @@
 
 </br></br></br>
 
-<% if (admin) { %>
+<!-- <p><% if (admin) { %>
 <p><form method="POST" action="/sparkle/<%= category.id %> ?_method=DELETE">
 	<input type="submit" value="Delete" style="border:2px green solid;"/>
 </form></p></br>
-<% } %>
+<p><% } %> -->
 
 <br/>
 

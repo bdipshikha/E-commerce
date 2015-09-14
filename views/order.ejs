@@ -60,8 +60,9 @@ jQuery(function($) {
 		text-align: left;
 	}
 	body {
-		padding-left: 10px;
-		background-color: #99EBFF;
+		padding-top: 10px;
+		padding-left: 30px;
+		/*background-color: #99EBFF;*/
 		font-weight: bold;
 		font-family: sans-serif;
 	}
@@ -74,10 +75,22 @@ jQuery(function($) {
 		font-size: 14px;
 		border-radius: 5px;
 	}
+	header {
+        height: 100%;
+        float: right;
+        padding-right: 50px;
+    }
+    #logo {
+        height: 70px;
+        width: 70px;            
+    }
 
 </style>
 </head>
 <body>
+	<header>
+		<img id = "logo" src = "http://globe-views.com/dcim/dreams/diamond/diamond-01.jpg"/>
+	</header>
 	<a href="/sparkles">Home</a>
 
 <!-- 	<form method="POST" action="http://localhost:3000/logout">
@@ -120,20 +133,20 @@ jQuery(function($) {
 		   </form>
 	
 
+		   <div class = "pay-info">
 			<h3> Payment Information: </h3>
-	
 			
 			<form class="pure-form" action='/order' method="post">
-				<label for="visa" class="pure-checkbox">
-					<input id="visa" type="checkbox" value="VISA">VISA
+				<label for="visa" class="pure-radio">
+					<input id="visa" type="radio" name= "optionsRadios" value="VISA">VISA
 				</label>
 
-				<label id="mastercard" class="pure-checkbox">
-					<input id="mastercard" type="checkbox" value="MASTERCARD">MASTER CARD
+				<label id="mastercard" class="pure-radio">
+					<input id="mastercard" type="radio" name= "optionsRadios" value="MASTERCARD">MASTER CARD
 				</label>
 
-				<label for="americanexpress" class="pure-checkbox">
-					<input id="americanexpress" type="checkbox" value="AMERICAN EXPRESS">AMERICAN EXPRESS
+				<label for="americanexpress" class="pure-radio">
+					<input id="americanexpress" type="radio" name = "optionsRadios" value="AMERICAN EXPRESS">AMERICAN EXPRESS
 				</label>	
 			
 			</form>
@@ -160,7 +173,7 @@ jQuery(function($) {
 				</div>
 				<div class="pure-control-group">
 					<label for="amount">Amount:</label>
-						<input name="amount" data-stripe="amount" value="<%= total %>"/></br></br>
+						<input name="amount" data-stripe="amount" value="<%= total %>" readonly/></br></br>
 				</div>
 				<div class="pure-controls">
 					<button style="border:2px green solid;" type="submit">Submit Payment</button>

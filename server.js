@@ -177,7 +177,7 @@ app.post('/category/:catid/item/savenewitem', function(req, res) {
     var catid = req.params.catid;
 
     //get info from req.body, make new item
-    db.run("INSERT INTO items (category_id, name, image, quantity, price) VALUES (?, ?, ?, ?, ?);", catid, req.body.name, req.body.image, req.body.quantity, req.body.price,
+    db.run("INSERT INTO items (category_id, name, image, quantity, price, description) VALUES (?, ?, ?, ?, ?, ?);", catid, req.body.name, req.body.image, req.body.quantity, req.body.price, req.body.description,
         function(err) {
             if (err) {
                 console.log("Inserting work!");
@@ -205,8 +205,8 @@ app.get('/item/:id/edit', function(req, res) {
 
 app.put('/item/:id/update', function(req, res) {
 
-    db.run("UPDATE items SET  name = ?, image = ?,  quantity = ?, price = ? WHERE id = ?", req.body.name,
-        req.body.image, req.body.quantity, req.body.price, req.params.id,
+    db.run("UPDATE items SET  name = ?, image = ?,  quantity = ?, price = ?, description = ? WHERE id = ?", req.body.name,
+        req.body.image, req.body.quantity, req.body.price, req.body.description, req.params.id,
         function(err) {
             if (err) {
                 throw err
@@ -229,7 +229,7 @@ app.delete("/item/:id", function(req, res) {
 
 app.get('/item/:id/add-to-shopping-cart', function(req, res) {
     var id = req.params.id;
-
+    var subtotal = 0;
     db.get("SELECT items.id, items.name, items.price, items.quantity FROM items WHERE id = ?", id, function(err, item) {
         if (err) {
             throw err
@@ -242,17 +242,36 @@ app.get('/item/:id/add-to-shopping-cart', function(req, res) {
             newCartItem.itemPrice = item.price;
             newCartItem.itemName = item.name;
 
-            if (req.session.cart == null) req.session.cart = [];
+            if (req.session.cart == null) {
+                req.session.cart = [];
+            } 
             req.session.cart.push(newCartItem);
-
             res.redirect('/cart')
         }
     });
-
 });
 
 
 app.get('/cart', function(req, res) {
+    if (req.session.cart == null) {
+        req.session.cart = [];
+    } 
+
+    var subtotal = 0;
+    var tax = 0;
+    var total = 0;
+    for (var i = 0; i < req.session.cart.length; i++) {
+        subtotal = subtotal 
+            + req.session.cart[i].itemQty * req.session.cart[i].itemPrice;
+    }
+    tax = (subtotal * 7)/100;
+    total = subtotal + tax; 
+
+    req.session.cart.tax = tax;
+    req.session.cart.total = total;
+    req.session.cart.subtotal = subtotal;
+
+
     res.render('shopping-cart.ejs', {
         'cart': req.session.cart
     })
@@ -261,6 +280,7 @@ app.get('/cart', function(req, res) {
 app.post('/item/:id/add-to-shopping-cart', function(req, res) {
     db.run("INSERT INTO carts (item_id, session_id, item_name, item_price, item_quantity) VALUES (?, ?, ?, ?, ?)", req.body.item_id, req.body.session_id, req.body.item_name, req.body.item_price, req.body.quantity, function(err) {
         if (err) {
+            
             throw err
         } else {
 
@@ -275,13 +295,18 @@ app.get('/order', function(req, res) {
 
     var cid = req.params.id;
 
+    var subtotal = 0;
+    var tax = 0;
     var total = 0;
     if (req.session != null && req.session.cart != null) {
         for (var idx = 0; idx < req.session.cart.length; idx++) {
-            total = total + req.session.cart[idx].itemQty * req.session.cart[idx].itemPrice
+            subtotal = subtotal + req.session.cart[idx].itemQty * req.session.cart[idx].itemPrice;
+            tax = (subtotal * 7)/100;
+            total = subtotal + tax;
         }
     }
 
+    req.session.cart = []
     res.render('order.ejs', {
         item_id: cid,
         'total': total
@@ -317,6 +342,8 @@ app.post('/create-user', function(req, res) {
         });
     }
 });
+
+// creating session upon login 
 
 app.post('/create-session', function(req, res) {
     var username = req.body.username;
@@ -389,11 +416,11 @@ app.post('/order', function(req, res) {
                         }  
                     });
             }
- 
-            res.send('Your order has been processed. Your card will be charged with $' + req.body.amount +
-                '. Your item will be shipped to the billing address. Thank you for shopping with us!');
-            res.end();
+           
+            res.send('<a href = /sparkles>Home</a></br></br> Your order has been processed. Your card will be charged with $' + req.body.amount +
+                '. Thank you for shopping with us!');
 
+            res.end();      
         }
     });
 });

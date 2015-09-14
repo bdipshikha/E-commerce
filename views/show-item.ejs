@@ -2,9 +2,9 @@
 <head>
 	<style>
 		img {
-			width: 200px;
-			height: 200px;
+			width: 300px;
 		}
+		
 		h1 {
 			text-align: center;
 		}
@@ -18,11 +18,33 @@
 			width: 800px;
 		}
 		body {
-			padding: 5px 30px 30px 30px;
-			background-color: #99EBFF;
+			padding-left: 30px;
 			position: center;
 			font-family: sans-serif;
 		}
+		#sidebar {
+			padding-left: 50px;
+			float: left;
+			width: 400px;
+			height: 600px;
+		}
+		#main {
+			padding-top: 50px;
+			text-align: justify;
+			float: right;
+			width: 700px;
+			padding-right: 50px;
+		}
+		header {
+			height: 100%;
+			float: right;
+			padding-right: 50px;
+		}
+		#logo {
+			height: 70px;
+			width: 70px;			
+		}
+
 
 	</style>
 
@@ -31,14 +53,23 @@
 </head>
 
 <body>
+	<header>
+		<img id = "logo" src = "http://globe-views.com/dcim/dreams/diamond/diamond-01.jpg"/>
+	</header>
 	<table>
 		
 		<td><a class="hyper" href="/sparkles">Home</a></td>
+		
 		<% if (admin) { %>
 		<td><a class="hyper" href="/item/<%= item.id %>/edit">Edit Item</a></td>
+		
+		<td><form method="POST" action="/item/<%= item.id %>?_method=DELETE">
+			<input type="submit" value="Delete" style="border:2px green solid;"/>
+		</form></td>
+
 		<td><form method="POST" action="/logout">
 			<button style="border:2px green solid;">Logout</button></td>
-			<% } %>
+		<% } %>
 
 
 		</form>
@@ -47,20 +78,20 @@
 	<h1><%= item.name %></h1> 
 
 	<p>
-		<img src="<%= item.image %>"><br>
-		Price: $<%= item.price %></br>
+		<div id = "sidebar">
+			<img src="<%= item.image %>"><br>
+		</div>
+
+		<div id = "main">
+			<%= item.description %></br></br>
+		
+		
+			Price: $<%= item.price %></br></br>
+		<button style="border:2px green solid;"><a href="/item/<%= item.id %>/add-to-shopping-cart">Add to cart</a></button></br></br>
 		<% if (admin) { %>
-		Amount in stock: <%= item.quantity %></br>
+			Amount in stock: <%= item.quantity %></br>
 		<% } %>
-		<a href="/item/<%= item.id %>/add-to-shopping-cart">Add to cart</a>
-	<!-- <form method="POST" action="/item/<%= item.id %>/order">
-		<input type = "submit" value = "Buy!" style = "border:2px green solid;"/>
-	</form> -->
-	<% if (admin) { %>
-	<form method="POST" action="/item/<%= item.id %>?_method=DELETE">
-		<input type="submit" value="Delete" style="border:2px green solid;"/>
-	</form>
-	<% } %>
+		</div>
 </p>
 
 </body>

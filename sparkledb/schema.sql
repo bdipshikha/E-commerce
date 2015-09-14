@@ -12,6 +12,7 @@ id INTEGER PRIMARY KEY,
 category_id INTEGER,
 name TEXT,
 image TEXT,
+description TEXT,
 quantity INTEGER,
 price INTEGER,
 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -45,9 +46,3 @@ item_price INTEGER,
 item_quantity INTEGER,
 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-
-
-
-
-
-
