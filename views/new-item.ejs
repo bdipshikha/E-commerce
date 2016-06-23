@@ -1,43 +1,91 @@
 <!DOCTYPE html>
+<html>
 <head>
-<style>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+  	<link href='https://fonts.googleapis.com/css?family=Amaranth' rel='stylesheet' type='text/css'>
+  	<meta name="viewport" content="width=device-width, initial-scale=1">
+  	<title>Spark.le! Jewelry</title>
+	<style>
 		body {
-			padding-left: 50px;
-			/*background-color: #99EBFF;*/
-			font-family: sans-serif;
+			margin-top: 40px;
+			padding-right: 40px;
+			padding-left: 20px;
+			background-color: #c9c9c9;
+			font-family: amaranth;
 		}
 		input[type="text"] {
-			width: 400px;
-			font-size: 20px;
+			width: 100%;
+			font-size: 18px;
+			border-radius: 5px;
 		}
 		input[type="number"] {
-			width: 400px;
-			font-size: 20px;
+			width: 100%;
+			font-size: 18px;
+			border-radius: 5px;
 		}
-		table {
-			width: 800px;
-		}
+		
 		textarea {
-			font-size: 20px;
+			width: 100%;
+			font-size:18px;
+			border-radius: 5px;
 		}
+		h1 {
+			text-align: center;
+		}
+		.btn-secondary {
+			width: 100%;
+			font-size: 18px;
+      background-color: #1565c0;
+      color: white;
+    }
+    .col-md-6 {
+    	margin-bottom: 15px;
+    }
 	</style>	
 </head>
 <body>
-<table>
-<td><a href="/sparkles">Home</a></br></td>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+<!-- <td><a href="/sparkles">Home</a></br></td>
 <form method="POST" action="/logout">
 	<td><button style="border:2px green solid;">Logout</button></td>
 </form>
-</table>
-	<h1>Add a New Item</h1>
-	<p><form action ="/category/<%= category_id %>/item/savenewitem" method="POST">
+</table> -->
 
-		<input class="text" type="text" name="name" placeholder="name"><br></p>
-		<input class="image" type="text" name="image" placeholder="url" ></br></br>
-		<input class="price" type="number" name="price" placeholder="price" ></br></br>
-		<input class="quantity" type="number" name="quantity" placeholder="quantity"></br></br>
-		<textarea rows="15" cols="100" name="description" placeholder="description"></textarea></br></br>
-		<input type="submit" value="Save New Item" style="border:2px green solid;"/>
-	</form>
+	<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand">Spark.le Jewelry</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+          	<li><a href="/">Home</a></li>
+          	<li><a method="GET" href="/logout">Logout</a></li>
+          </ul>
+        </div>
+      </div>
+   	</div></br>
+
+	<h1>Add a New Item</h1></br></br>
+	<div class = "row">
+		<div class = "col-md-6 col-md-offset-3">
+			<form action ="/category/<%= category_id %>/item/savenewitem" method="POST">
+				<input class="text" type="text" name="name" placeholder="name"></br></br>
+				<input class="image" type="text" name="image" placeholder="url" ></br></br>
+				<input class="price" type="number" name="price" placeholder="price" ></br></br>
+				<input class="quantity" type="number" name="quantity" placeholder="quantity"></br></br>
+				<textarea rows="8" cols="100" name="description" placeholder="description"></textarea></br>
+				<input class = "btn btn-secondary" type="submit" value="Save New Item"/>
+			</form>
+		</div>
+	</div>
 </body>
 </html>

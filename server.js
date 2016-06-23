@@ -52,17 +52,21 @@ app.get('/', function(req, res) {
 
 // to get all the categories
 app.get('/sparkles', function(req, res) {
-    db.all("SELECT * FROM categories;", function(err, data) { // db for database not the name of database
-        var sparkle = data;
+    db.all("SELECT * FROM categories;", function(err, categories) { // db for database not the name of database
+        var sparkle = categories;
         var admin = false;
         if (req.session != null) {
             admin = req.session.valid_user;
-        } 
-        res.render('index.ejs', {
+        }
+        db.all("SELECT * FROM items ORDER BY created_at DESC LIMIT 6;", function(err, items) {
+          var sparkle = items;       
+          res.render('index.ejs', {
             sparkle: sparkle,
+            categories: categories,
+            items: items,
             admin: admin
+          });
         });
-
     });
 });
 
@@ -230,14 +234,14 @@ app.delete("/item/:id", function(req, res) {
 app.get('/item/:id/add-to-shopping-cart', function(req, res) {
     var id = req.params.id;
     var subtotal = 0;
-    db.get("SELECT items.id, items.name, items.price, items.quantity FROM items WHERE id = ?", id, function(err, item) {
+    db.get("SELECT items.id, items.image, items.name, items.price, items.quantity FROM items WHERE id = ?", id, function(err, item) {
         if (err) {
             throw err
         } else {
 
-
             var newCartItem = {};
             newCartItem.itemId = id;
+            newCartItem.itemImage = item.image;
             newCartItem.itemQty = 1;
             newCartItem.itemPrice = item.price;
             newCartItem.itemName = item.name;
@@ -321,6 +325,10 @@ app.get('/login', function(req, res) {
 
 });
 
+app.get('/sign-up', function(req, res) {
+    res.sendFile(__dirname + '/public/sign-up.html');
+});
+
 // creating admin
 app.post('/create-user', function(req, res) {
     var username = req.body.username;
@@ -368,14 +376,14 @@ app.post('/create-session', function(req, res) {
 });
 
 // to logout and kill session
-app.post('/logout', function(req, res) {
+app.get('/logout', function(req, res) {
     // console.log(req.session.valid_user)
     req.session.destroy(function(err) {
         if (err) {
             throw (err)
         } else {
             // console.log(req.session)
-            res.redirect('/login')
+            res.redirect('/')
         }
     });
 });
@@ -397,12 +405,13 @@ app.post('/order', function(req, res) {
         description: "Example charge"
     }, function(err, charge) {
         if (err && err.type === 'StripeCardError') {
-
+          console.log("BIG ERROR")
         } else {
          
 
             for (var idx=0; idx <req.session.cart.length; idx++) {
                 var item = req.session.cart[idx];
+                console.log("working!")
                 db.run("INSERT INTO orders (sessionID, item_name, item_id, item_quantity, item_price)"+
                     " VALUES (?, ?, ?, ?, ?);",  
                     req.sessionID,
@@ -413,12 +422,17 @@ app.post('/order', function(req, res) {
                     function(err) {
                         if (err) {
                             throw err
-                        }  
+                        } 
+                        // else {
+                        //   db.run("UPDATE items SET quantity = ?  WHERE id = ?", req.body.quantity, req.params.id,
+                            
+                        // }  
                     });
             }
-           
-            res.send('<a href = /sparkles>Home</a></br></br> Your order has been processed. Your card will be charged with $' + req.body.amount +
-                '. Thank you for shopping with us!');
+                       
+                res.render('confirmation.ejs', {
+                  "amount": req.body.amount
+                });
 
             res.end();      
         }

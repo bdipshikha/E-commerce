@@ -4,7 +4,13 @@
 	<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
-
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+  <link href='https://fonts.googleapis.com/css?family=Amaranth' rel='stylesheet' type='text/css'>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+ 	
+ 	<title>Spark.le! Jewelry</title>
+	
 	<script type="text/javascript">
     // Fill in your publishable key
     Stripe.setPublishableKey('pk_test_fi2vIZQm6VsnqLfJljb2jErl');
@@ -14,173 +20,248 @@
 
     	if (response.error) {
        // Show the errors on the form
-       $form.find('.payment-errors').text(response.error.message);
-       $form.find('button').prop('disabled', false);
-   } else {
+       	$form.find('.payment-errors').text(response.error.message);
+       	$form.find('button').prop('disabled', false);
+   		} else {
        // token contains id, last4, and card type
-       var token = response.id;
+       	var token = response.id;
        // Insert the token into the form so it gets submitted to the server
-       $form.append($('<input type="hidden" name="stripeToken" />').val(token));
+       	$form.append($('<input type="hidden" name="stripeToken" />').val(token));
        // and re-submit
-       $form.get(0).submit();
-   }
-};
+       	$form.get(0).submit();
+   		}
+		};
 
-jQuery(function($) {
-	$('#payment-form').submit(function(e) {
-		var $form = $(this);
+		jQuery(function($) {
+			$('#payment-form').submit(function(e) {
+				var $form = $(this);
 
        // Disable the submit button to prevent repeated clicks
-       $form.find('button').prop('disabled', true);
+       	$form.find('button').prop('disabled', true);
 
-       Stripe.card.createToken($form, stripeResponseHandler);
+       	Stripe.card.createToken($form, stripeResponseHandler);
 
        // Prevent the form from submitting with the default action
-       return false;
-   });
-});
-</script>
+       	return false;
+   		});
+		});
+	</script>
 
-<style>
+	<style>
 
-	.customer-container {
-		border: 1px solid black;
-    	width: 50%;
-    	margin: 5% auto;
-    	padding-left: 10px;
-    	padding-bottom: 20px;
+		h1 {
+			text-align: center;
+		}
+		h3 {
+			text-align: center;
+		}
+		body {
+			padding-left: 20px;
+			padding-right: 20px;
+			margin-top: 20px;
+			margin-left: 30px;
+			margin-bottom: 30px;
+			background-color: #c9c9c9;
+			font-family: amaranth;
+		}
 
+		.required:after {
+			content: " *";
+			color: red;
+			display:inline;
+		}
 
-	}
+		input[type="text"] {
+			width: 40%;
+			font-size: 14px;
+			border-radius: 5px;
+		}
+		input[data-stripe] {
+			width: 50%;
+			font-size: 14px;
+			border-radius: 5px;
+		}
+		.controls label {
+			display: inline-block;
+			padding-left: 40px;
+    	padding: 20px;
+		}
+		.controls {
+			text-align: center;
+		}
 
-	h1 {
-		text-align: center;
-	}
-	h3 {
-		text-align: left;
-	}
-	body {
-		padding-top: 10px;
-		padding-left: 30px;
-		/*background-color: #99EBFF;*/
-		font-weight: bold;
-		font-family: sans-serif;
-	}
+		input[type="textarea"] {
+			width: 100%;
+			height: 50px;
+			border-radius: 5px;
+		}
+		input[type="text"] {
+			font-size: 22px;
+			width: 100%;
+			border-radius: 5px;
+		}
+		input[type="number"] {
+			font-size: 22px;
+			width: 100%;
+			border-radius: 5px;
+		}
+		.col-md-6 {
+			padding-bottom: 8px;
+		}
 
-	input[type="text"] {
-		font-size: 14px;
-		border-radius: 5px;
-	}
-	input[data-stripe] {
-		font-size: 14px;
-		border-radius: 5px;
-	}
-	header {
-        height: 100%;
-        float: right;
-        padding-right: 50px;
-    }
-    #logo {
-        height: 70px;
-        width: 70px;            
-    }
+		.col-md-12 {
+			padding-bottom: 8px;
+			width: 100%;
+		}
 
-</style>
+		input[data-stripe] {
+			width: 100%;
+			border-radius: 5px;
+		}
+		input[data-stripe].number {
+			width: 100%;
+			border-radius: 5px;
+		}
+
+		.btn-secondary {
+  		background-color: #1565c0;
+  		color: white;
+		}
+
+	</style>
 </head>
 <body>
-	<header>
-		<img id = "logo" src = "http://globe-views.com/dcim/dreams/diamond/diamond-01.jpg"/>
-	</header>
-	<a href="/sparkles">Home</a>
-
-<!-- 	<form method="POST" action="http://localhost:3000/logout">
-		<button style="border:2px green solid;">Logout</button>
-	</form> -->
-	<h1> Checkout </h1>
-	<div class="customer-container">
-		<h3> Billing Information: </h3>
-		   <form action='/order' method="POST" class="pure-form pure-form-aligned">
-			<fieldset>
-				<div class="pure-control-group">
-				<label for="firstname">Firstname:</label>
-					<input type="text" name = "firstname"></br>
-				</div>
-				<div class="pure-control-group">
-				<label for="lastname">Lastname:</label>
-					<input type="text" name = "lastname"></br>
-				</div>
-				<div class="pure-control-group">
-					<label for="address">Address:</label>
-						<input type="text" name = "address"></br>
-				</div>
-				<div class="pure-control-group">
-				<label for="city">City:</label>
-					<input type="text" name = "city"></br>
-				</div>
-				<div class="pure-control-group">
-					<label for="country">Country:</label>
-						<input type="text" name = "country"></br>
-				</div>
-				<div class="pure-control-group">
-					<label for="state">State:</label>
-						<input type="text" name = "state"></br>
-				</div>
-				<div class="pure-control-group">
-				<label for="zip">Zip:</label>	
-					<input type="text" name = "zip"></br>
-				</div>
-			</fieldset>
-		   </form>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 	
+  	<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand">Spark.le Jewelry</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+          	<li><a href="/">Home</a></li>
+          </ul>
+        </div>
+      </div>
+   	</div></br>
 
-		   <div class = "pay-info">
-			<h3> Payment Information: </h3>
-			
-			<form class="pure-form" action='/order' method="post">
-				<label for="visa" class="pure-radio">
-					<input id="visa" type="radio" name= "optionsRadios" value="VISA">VISA
-				</label>
+	<h1><u>Checkout</u> </h1></br></br>
+<!-- correct code strats here -->
+						<div class = "row">
+							<div class = "col-md-4">
+							<form action='/order' method="POST">
+								<h3> Billing Information: </h3>
+								<div class = "row">
+									<div class = "col-md-6">
+										<label  class = "required" for="firstname">First Name</label>
+										<input type="text" name = "firstname">
+									</div>
+									<div class = "col-md-6">
+										<label  class = "required" for="lastname">Last Name</label>
+										<input type="text" name = "lastname">
+									</div>								
+								</div>
+								<div class = "row">
+									<div class = "col-md-12">
+										<label  class = "required" for="address">Address</label>
+										<input type="textarea" name = "address" width="100%">
+									</div>
+								</div>
+								<div class = "row">
+									<div class = "col-md-6">
+										<label  class = "required" for="city">City:</label>
+										<input type="text" name = "city">
+									</div>
+									<div class = "col-md-6">
+										<label  class = "required" for="country">Country:</label>
+										<input type="text" name = "country">
+									</div>
+								</div>
+								<div class = "row">
+									<div class = "col-md-6">
+										<label  class = "required" for="state">State:</label>
+										<input type="text" name = "state">
+									</div>
+									<div class = "col-md-6">
+										<label  class = "required" for="zip">Zip:</label>
+										<input type="number" name = "zip">
+									</div>
+								</div>
+							</form>
+							</div>
 
-				<label id="mastercard" class="pure-radio">
-					<input id="mastercard" type="radio" name= "optionsRadios" value="MASTERCARD">MASTER CARD
-				</label>
 
-				<label for="americanexpress" class="pure-radio">
-					<input id="americanexpress" type="radio" name = "optionsRadios" value="AMERICAN EXPRESS">AMERICAN EXPRESS
-				</label>	
-			
-			</form>
+						<form class="pure-form" action='/order' method="post">
+							<div class = "col-md-4 col-md-offset-2">
+								<h3> Payment Information: </h3>
 
-			<form action="/order" method="POST" id="payment-form" class="pure-form pure-form-aligned">
+								<div class = "row">
+									<div class = "col-md-12">
+										<form class="pure-form" action='/order' method="post">
+										<div class = "controls">
+											<label class="radio">
+												<input id="visa" type="radio" name= "optionsRadios" value="VISA"><img src="http://www.credit-card-logos.com/images/visa_credit-card-logos/visa_logo_3.gif" width="35" height="22" border="0" /></a>
+											</label>
+											<label class="radio">
+												<input id="mastercard" type="radio" name= "optionsRadios" value="MASTERCARD"><img src="http://www.credit-card-logos.com/images/mastercard_credit-card-logos/mastercard_logo_3.gif" width="35" height="22" border="0" /></a>
+											</label>
 
-				<!-- Add a section to display errors if you want -->
-				<span class='payment-errors' style="color: red;"></span></br></br>
-				<div class="pure-control-group">
-					<label for="number">Card Number:</label>
-						<input data-stripe="number"/></br>
-				</div>
-				<div class="pure-control-group">
-					<label for="cvc">CVC:</label>
-						<input data-stripe="cvc"/></br>
-				</div>
-				<div class="pure-control-group">
-					<label for="exp-month">Exp-Month:</label>
-						<input data-stripe="exp-month"/></br>
-				</div>
-				<div class="pure-control-group">
-					<label for="exp-year">Exp-Year:</label>
-						<input data-stripe="exp-year"/></br>
-				</div>
-				<div class="pure-control-group">
-					<label for="amount">Amount:</label>
-						<input name="amount" data-stripe="amount" value="<%= total %>" readonly/></br></br>
-				</div>
-				<div class="pure-controls">
-					<button style="border:2px green solid;" type="submit">Submit Payment</button>
-				</div>
-			</form>
+											<label class="radio">
+												<input id="americanexpress" type="radio" name = "optionsRadios" value="AMERICAN EXPRESS"><img src="http://www.credit-card-logos.com/images/american_express_credit-card-logos/american_express_logo_2.gif" width="35" height="22" border="0" /></a>
+											</label>
+										</div>
+										</form>
+									</div>
+								</div>
+								<form action="/order" method="POST" id="payment-form">
+								<span class='payment-errors' style="color: red;"></span>
+								<div class = "row">
+									<div class = "col-md-12">
+										<div class = "row">
+											<div class = "col-md-8">
+												<label class = "required" for="number">Card Number:</label></br>
+													<input data-stripe="number"/></br>
+											</div>
+											<div class = "col-md-4">
+												<label class = "required" for="cvc">CVC:</label>
+													<input data-stripe="cvc"/>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class = "row">			
+									<div class = "col-md-6">
+										<label class = "required" for="exp-month">Exp-Month:</label></br>
+										<input data-stripe="exp-month"/>
+									</div>
+									<div class = "col-md-6">
+										<label class = "required" for="exp-year">Exp-Year:</label></br>
+										<input data-stripe="exp-year"/>
+									</div>							
+								</div>
+								<div class="row">
+									<div class = "col-md-6">
+										<label for="amount">Amount:</label>
+											<input name="amount" data-stripe="amount" value="<%= total %>" readonly/>
+									</div>
+								</div></br>
+								<div class = "row">
+									<div class = "col-md-6">
+										<button class="btn btn-secondary" type="submit">Submit Payment</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</form>
 
-	</div>
 
 </body>
 

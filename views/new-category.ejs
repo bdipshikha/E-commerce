@@ -1,35 +1,81 @@
 <!DOCTYPE html>
 <head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+  <link href='https://fonts.googleapis.com/css?family=Amaranth' rel='stylesheet' type='text/css'>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Spark.le! Jewelry</title>
 	<style>
 		body {
-			padding-left: 50px;
-			/*background-color: #99EBFF;*/
-			font-family: sans-serif;
+			margin-top: 40px;
+			padding-right: 40px;
+			padding-left: 20px;
+			background-color: #e3e3e3;
+			font-family: amaranth;
 		}
 		input[type="text"] {
-			width: 400px;
-			font-size: 20px;
+			width: 100%;
+			font-size: 18px;
+			border-radius: 5px;
 		}
-		table {
-			width: 800px;
+		h1 {
+			text-align: center;
+		}
+		.col-md-4 {
+			padding-right: 20px;
+			padding-left: 20px;
+		}
+
+		input[type="submit"] {
+			background-color: #1565c0;
+			color: white;
+			width: 100%;
+			font-size: 18px;
+			border-radius: 5px;
 		}
 	</style>
 
 </head>
 <body>
-	<table>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<!-- 	<table>
 		<td><a href="/sparkles">Home</a></td>
 		<td><form method="POST" action="/logout">
 			<button style="border:2px green solid;">Logout</button></td>
 		</form>
-	</table>
-	<h1>Create a new Category</h1>
-	<form action ="/categories" method="POST">
-		<p><input class="text" type="text" name="name" placeholder="name" required><br></p>
-		<input class="image" type="text" name="image" placeholder="url"></br></br>
-		<input type="submit" value="Save New Category" style="border:2px green solid;"/>
+	</table> -->
 
-	</form>
+	<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand">Spark.le Jewelry</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+          	<li><a href="/">Home</a></li>
+          	<li><a method="GET" href="/logout">Logout</a></li>
+          </ul>
+        </div>
+      </div>
+   	</div></br>
+
+	<h1>Create a new Category</h1></br></br>
+		<div class = "row">
+			<div class = "col-md-4 col-md-offset-4">
+				<form action ="/categories" method="POST">
+					<p><input class="text" type="text" name="name" placeholder="name" required><br></p>
+					<input class="image" type="text" name="image" placeholder="url"></br></br>
+					<input type="submit" value="Save New Category"/>
+				</form>
+			</div>
+		</div>
 	
 </body>
 </html>

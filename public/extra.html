@@ -1,0 +1,184 @@
+
+ <table  align = "center" width = "400" height = "250">
+
+        <tr>
+            <th>Image</th>
+            <th>Item Name</th>
+            <th>Qty</th>
+            <th>Price</th>    
+        </tr>
+
+        <% for (var i = 0; i<cart.length; i++) { %>
+<!-- 
+        <tr>
+            <td><img src="<%= cart[i].itemImage %>"></td>
+            <td><%= cart[i].itemName %></td>
+            <td><%= cart[i].itemQty %></td>
+            <td><%= cart[i].itemPrice %></td>         
+        </tr>
+        <% } %>
+   
+
+        <tr>
+            <th></th>
+            <th></th>
+            <th>Subtotal</th>
+            
+            <td><%= cart.subtotal %></td>
+        </tr>  
+
+
+        <tr>
+            <th></th>
+            <th></th>
+            <th>Tax</th>
+            
+            <td><%= cart.tax %></td>
+        </tr>
+        <tr>
+            <th></th>
+            <th></th>
+            <th>Total</th>
+            
+            <td><%= cart.total %></td>
+         </tr> -->
+
+
+         <!--       <div class = "row">
+            <div class = "col-md-6">
+                
+                <h3> Billing Information: </h3>
+                <div class = "address">
+            <form action='/order' method="POST" class="pure-form pure-form-aligned">
+                <fieldset>
+                    <div class="pure-control-group">
+                        <label  class = "required" for="firstname">Firstname:</label>
+                        <input type="text" name = "firstname"></br>
+                    </div>
+                    
+                    <div class="pure-control-group">
+                        <label class = "required" for="lastname">Lastname:</label>
+                        <input type="text" name = "lastname"></br>
+                    </div>
+
+                    <div class="pure-control-group">
+                        <label class = "required" for="address">Address:</label>
+                        <input type="text" name = "address"></br>
+                    </div>
+                    
+                    <div class="pure-control-group">
+                        <label  class = "required" for="city">City:</label>
+                        <input type="text" name = "city"></br>
+                    </div>
+                    
+                    <div class="pure-control-group">
+                        <label class = "required" for="country">Country:</label>
+                        <input type="text" name = "country"></br>
+                    </div>
+                    
+                    <div class="pure-control-group">
+                        <label  class = "required" for="state">State:</label>
+                        <input type="text" name = "state"></br>
+                    </div>
+                    
+                    <div class="pure-control-group">
+                        <label class = "required"  for="zip">Zip:</label>   
+                        <input type="text" name = "zip"></br>
+                    </div>
+                </fieldset>
+            </form>
+            </div>
+            </div>
+            <div class = "col-md-6">
+                <div class = "row">
+                <div class = "col-md-12">
+                        <div class = "controls">
+                            <form class="pure-form" action='/order' method="post">
+                                <label class="radio">
+                                    <input id="visa" type="radio" name= "optionsRadios" value="VISA"><img src="http://www.credit-card-logos.com/images/visa_credit-card-logos/visa_logo_3.gif" width="35" height="22" border="0" /></a>
+                                </label>
+                                <label class="radio">
+                                    <input id="mastercard" type="radio" name= "optionsRadios" value="MASTERCARD"><img src="http://www.credit-card-logos.com/images/mastercard_credit-card-logos/mastercard_logo_3.gif" width="35" height="22" border="0" /></a>
+                                </label>
+
+                                <label class="radio">
+                                    <input id="americanexpress" type="radio" name = "optionsRadios" value="AMERICAN EXPRESS"><img src="http://www.credit-card-logos.com/images/american_express_credit-card-logos/american_express_logo_2.gif" width="35" height="22" border="0" /></a>
+                                </label>
+                            </form>
+                        </div>
+                    </div>
+
+                    <span class='payment-errors' style="color: red;"></span></br>
+                    <div class = "col-md-12">
+                        <form action="/order" method="POST" id="payment-form" class="pure-form pure-form-aligned">
+                        <fieldset>
+                
+
+                            <div class="pure-control-group">
+                                <label class = "required" for="number">Card Number:</label>
+                                <input data-stripe="number"/></br>
+                            </div>
+                            <div class="pure-control-group">
+                                <label class = "required" for="cvc">CVC:</label>
+                                    <input data-stripe="cvc"/></br>
+                            </div>
+                            <div class="pure-control-group">
+                                <label class = "required" for="exp-month">Exp-Month:</label>
+                                <input data-stripe="exp-month"/></br>
+                            </div>
+                            <div class="pure-control-group">
+                                <label class = "required" for="exp-year">Exp-Year:</label>
+                                <input data-stripe="exp-year"/></br>
+                            </div>
+                            <div class="pure-control-group">
+                                <label for="amount">Amount:</label>
+                                <input name="amount" data-stripe="amount" value="<%= total %>" readonly/></br></br>
+                            </div>
+                            <div class="pure-controls">
+                                <button style="border:2px green solid;" type="submit">Submit Payment</button>
+                            </div>
+                            <! </fieldset> -->
+<!--                        </form>
+                    </div>
+                </div> -->
+<!-- ****************************************************** -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+body {
+    text-align: justify;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: 50px;
+    margin-left: 30px;
+    background-color: #c9c9c9;
+  }
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand">Spark.le Jewelry</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/">Home</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+    <p>Your order has been processed. Your card will be charged with $' + req.body.amount +
+                '. Thank you for shopping with us!</p>
+
+<!-- **************************************************************** -->
+
+

@@ -2,91 +2,261 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <style>
-        h2 {
-            text-align: center;
-        }
-        body {
-            padding-left: 30px;
-            font-family: sans-serif;
-        }
-        table {
-            text-align: center;
-        }
-        form {
-            text-align: center;
-        }
-        header {
-            height: 100%;
-            float: right;
-            padding-right: 50px;
-        }
-        #logo {
-            height: 70px;
-            width: 70px;            
-        }
-    </style>
+  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+  <link href='https://fonts.googleapis.com/css?family=Amaranth' rel='stylesheet' type='text/css'>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Spark.le Jewelers</title>
+  <style>
+    h2 {
+      text-align: center;
+    }
+    body {
+      padding-right: 10px;
+      padding-left: 10px;
+      margin-top: 100px;
+      background-color: #c9c9c9;
+      font-family: amaranth;
+   }
 
+    img {
+      width: 60px;
+      height: 60px;
+    }
 
-    
-	<title></title>
+    .btn-secondary {
+      float: right;
+      background-color: #1565c0;
+    }
+    a {
+      color: white;
+    } 
+
+    /*css styling below is only applicable to bootstrap table to work with borders from table*/
+    .table th, .table td {
+      border-top: none !important;
+      text-align: center;
+      border-bottom-color: #0288d1 !important;
+      border-bottom-width: 2px !important;
+    } 
+
+    h4 {
+      color: white;
+    }
+
+    /*css styling below is only applicable to bootstrap table to change the border-top color*/
+/*    .table th, .table td  {
+      border-bottom-color: #0288d1 !important;
+      border-bottom-width: 3px !important;
+    }*/
+
+  </style>
 </head>
 <body>
-    <header>
-        <img id = "logo" src = "http://globe-views.com/dcim/dreams/diamond/diamond-01.jpg"/>
-    </header>
-    <td><a href="/sparkles">Home</a></td>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
-    <h2><u>Shopping cart</u></h2>
+  <!-- navbar starts here -->
 
+  <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand">Spark.le Jewelry</a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="/">Home</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+    <!-- navbar ends here -->
 
-    <table  align = "center" width = "400" height = "250">
+  <h2><u>Shopping cart</u></h2></br>
+  <div class = "row">
+    <div class ="col-md-8 col-md-offset-2">
+      <form action='/cart' method="POST">
+        <button type="button" class = "btn btn-secondary"><a href="/order">Proceed to Checkout</a></button>
+      </form>
+    </div>
+  </div></br>
+  <div class = "row">
+    <div class = "col-md-8 col-md-offset-2" style="background-color:#0288d1;">
+      <h4>Your shopping cart</h4>
+    </div>
+  </div>
+  <div class = "row">
+  <div class = "col-md-8 col-md-offset-2" style="border: 4px solid #0288d1;">
+  <table class = "table">
+    <thead>
+      <tr>
+        <th>Item Image</th>
+        <th>Item Name</th>
+        <th>Quantity</th>
+        <th>Item Price</th>
+      </tr>
+    </thead>
+    <tbody>
+     <% for (var i = 0; i<cart.length; i++) { %>
+      <tr>
+        <th><img src="<%= cart[i].itemImage %>"> </th>        
+        <td><%= cart[i].itemName %></td>
+        <td><%= cart[i].itemQty %></td>
+        <td>$<%= cart[i].itemPrice %></td>
+      <% } %>
+      </tr>
+      <tr>
+        <th></th>
+        <th></th>
+        <th><b>Subtotal</b></th>
+        <th>$<%= cart.subtotal %></th>
+      </tr>
+      <tr>
+        <th></th>
+        <th></th>
+        <th><b>Tax</b></th>
+        <th>$<%= cart.tax %></th>
+      </tr>
+      <tr>
+        <th></th>
+        <th></th>
+        <th><b>Total</b></th>
+        <th>$<%= cart.total %></th>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</div></br>
+  <div class = "row">
+    <div class ="col-md-8 col-md-offset-2">
+      <form action='/cart' method="POST">
+        <button type="button" class = "btn btn-secondary"><a href="/order">Proceed to Checkout</a></button>
+      </form>
+    </div>
+  </div>
 
-        <tr>
-            <th>Item</th>
-            <th>Qty</th>
-            <th>Price</th>    
-        </tr>
-
-        <% for (var i = 0; i<cart.length; i++) { %>
-
-        <tr>
-            <td><%= cart[i].itemName %></td>
-            <td><%= cart[i].itemQty %></td>
-            <td><%= cart[i].itemPrice %></td>         
-        </tr>
-        <% } %>
-   
-
-        <tr>
-            <th></th>
-            <th>Subtotal</th>
-            
-            <td><%= cart.subtotal %></td>
-        </tr>  
-
-
-        <tr>
-            <th></th>
-            <th>Tax</th>
-            
-            <td><%= cart.tax %></td>
-        </tr>
-        <tr>
-            <th></th>
-            <th>Total</th>
-            
-            <td><%= cart.total %></td>
-         </tr>
-       
-
-    </table>
-
-    <br/><br/>
-    <form action='/cart' method="POST">
-    <a href="/order">Checkout</a>
-    
-
-
+ <!--  <div class = "row">
+    <div class = "col-md-8 col-md-offset-2" style="border: 4px solid #0288d1;">
+      <div class = "row" style="height:50px; background-color:#0288d1; color: white; text-align:left;">
+        <div class ="col-md-8">
+          <h4 id = "cart">Your Shopping Cart</h4>
+        </div>
+      </div>
+  </br>
+  <div class = "row">
+    <div class = "col-md-8 col-md-offset-2">
+      <div class = "row">
+        <div class = "col-md-3">
+          <h4>Item Image</h4>
+        </div>
+        <div class = "col-md-3">
+          <h4>Item Name</h4>
+        </div>
+        <div class = "col-md-3">
+          <h4>Quantity</h4>
+        </div>
+        <div class = "col-md-3">
+          <h4>Item Price</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% for (var i = 0; i<cart.length; i++) { %>
+  <div class = "row">
+    <div class = "col-md-8 col-md-offset-2">
+      <div class = "row">
+        <div class = "col-md-3">
+          <img src="<%= cart[i].itemImage %>">
+        </div>
+        <div class = "col-md-3">
+          <%= cart[i].itemName %>
+        </div>
+        <div class = "col-md-3">
+          <%= cart[i].itemQty %>
+        </div>
+        <div class = "col-md-3">
+          $<%= cart[i].itemPrice %>
+        </div>
+      </div>
+    </div> 
+  </div>
+  <% } %>
+  <div class = "row">
+    <div class = "col-md-8 col-md-offset-2">
+      <div class = "row">
+        <div class = "col-md-3">
+        </div>
+        <div class = "col-md-3">
+        </div>
+        <div class = "col-md-3">
+          <b>Subtotal</b>
+        </div>
+        <div class = "col-md-3">
+          $<%= cart.subtotal %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class = "row">
+    <div class = "col-md-8 col-md-offset-2">
+      <div class = "row">
+        <div class = "col-md-3">
+        </div>
+        <div class = "col-md-3">
+        </div>
+        <div class = "col-md-3">
+          <b>Tax</b>
+        </div>
+        <div class = "col-md-3">
+          $<%= cart.tax %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class = "row">
+    <div class = "col-md-8 col-md-offset-2">
+      <div class = "row">
+        <div class = "col-md-3">
+        </div>
+        <div class = "col-md-3">
+        </div>
+        <div class = "col-md-3">
+         <b>Total</b>
+        </div>
+        <div class = "col-md-3">
+          $<%= cart.total %>
+        </div>
+    </div>
+  </div>
+  </div>
+  </div>
+  </div></br>
+  <div class = "row">
+    <div class = "col-md-8 col-md-offset-2">
+      <div class = "row">
+        <div class = "col-md-3">
+        </div>
+        <div class = "col-md-3">
+        </div>
+        <div class = "col-md-3">
+        </div>
+        <div class = "col-md-3">
+          <form action='/cart' method="POST">
+            <button type="button" class = "btn btn-secondary"><a href="/order">Proceed to Checkout</a></button>
+          </form>
+      </div>
+    </div>
+  </div>
+  </div> -->
 </body>
 </html>
+
+
+

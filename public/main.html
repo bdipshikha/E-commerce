@@ -1,93 +1,102 @@
+<!DOCTYPE html>
 <html>
 <head>
   <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+  <link href='https://fonts.googleapis.com/css?family=Amaranth' rel='stylesheet' type='text/css'>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+
+    .col-md-4 {
+      /*margin-bottom: 10px;*/
+    }
+    body {
+      padding-left: 15px;
+      padding-right: 15px;
+      margin-top: 100px;
+      background-color: #c9c9c9;
+      font-family: amaranth;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      font-size: 16px;
+      border-radius: 5px;
+    }
+
+    input[type="password"] {
+      width: 100%;
+      font-size: 16px;
+      border-radius: 5px;
+    }
+
+    h3 {
+      text-align: center;
+    }
+    h5 {
+      text-align: center;
+    }
+    .pure-button {
+      width: 100%;
+      display: block;
+      border-radius: 5px;
+      font-size: 20px;
+      background-color: #1565c0;
+      color: white;
+    }
+   
+  </style>
 </head>
-<style>
-  .login-container {
-    border: 1px solid black;
-    width: 50%;
-    margin: 5% auto;
-    padding: 5px;
-
-  }
-
-  body {
-    background-color: #99EBFF;
-    padding-left: 5px;
-    font-size: 16px;
-    font-weight: bold;
-  }
-
-  input[type="text"] {
-    font-size: 16px;
-    border-radius: 5px;
-  }
-
-  input[type="password"] {
-    font-size: 16px;
-    border-radius: 5px;
-  }
-
-  h3 {
-    text-align: center;
-  }
-
-  
-  
-</style>
 
 <body>
-
- <div class="login-container">
-
- 
-    <h3>New to this Site? Sign Up!</h3><br/>
-
-    <form action = "/create-user" method = "POST" class="pure-form pure-form-aligned">
-      <fieldset>
-
-      <div class="pure-control-group">
-        <label for="username">Username: </label>
-        <input type = "text" name = "username"><br/>
-      </div>
-
-      <div class="pure-control-group">
-        <label for="password">Password: </label>
-        <input type = "password" name = "password"><br/>
-      </div>
-
-      <div class="pure-control-group">
-        <label for="confirm_password">Confirmation: </label>
-        <input type = "password" name = "confirm_password"><br/>
-      </div>
-      
-      <div class="pure-controls">
-        <button style="border:2px green solid;">Sign Up</button>
-      </div>
-      </fieldset>
-    </form>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
   
-  
-  <br/><br/>
-  <!-- <fieldset> -->
- 
-    <h3>Have an Account? Sign In</h3></br>
-
-    <form action = "/create-session" method = "POST" class="pure-form pure-form-aligned">
-      <div class="pure-control-group">
-        <label for="username">Username: </label>
-        <input type = "text" name = "username"><br/>
-       </div>
-       
-       <div class="pure-control-group"> 
-        <label for="password">Password: </label>
-        <input type = "password" name = "password"><br/>
-      </div>
-      <div class="pure-controls">
-        <button style="border:2px green solid;">Sign In</button>
+    <!-- navbar starts here -->
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand">Spark.le Jewelry</a>
         </div>
-    </form>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/">Home</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- navbar ends here -->
+  
+  
 
-  </div>
+  
+  <form action = "/create-session" method = "POST" class="pure-form pure-form-aligned">
+    <div class = "row">
+      <h3>Log In</h3></br>
+      <div class = "col-md-4 col-md-offset-4">
+        <label for="username">Username: </label>
+        <input type = "text" name = "username">
+      </div>
+    </div>
+    <div class = "row">   
+      <div class="col-md-4 col-md-offset-4"> 
+        <label for="password">Password: </label>
+        <input type = "password" name = "password">
+      </div>
+    </div></br>
+    <div class = "row">
+      <div class = "col-md-4 col-md-offset-4">
+        <button class="button-large pure-button">Log In</button>
+      </div>
+    </div>
+  </form>
+        <h5>Don't have an account?<a href="/sign-up"> Sign Up</a></h5>
 </body>
 </html>
