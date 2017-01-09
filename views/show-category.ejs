@@ -32,6 +32,22 @@
 			height: 210px;
 			border-radius: 5px;
 		}
+/*********   To remove clearfix the left column in .col-xs-6 extra small screen ***************/
+		
+
+		@media (max-width:730px){
+			.col-xs-6:nth-child(2n+1) {
+				clear: left;
+			}
+
+		}
+
+		@media (min-width: 1024px) {
+			.col-md-3:nth-child(4n+1) {
+				clear: left;
+			}
+		}
+		
 
 	</style>
 
